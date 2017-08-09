@@ -48,16 +48,19 @@ describe("POSTNET encode", function () {
         expect(expect_string).to.equal(result);
     });
 
+    console.log.restore();//此处需解除对console的监视
+
 });
 
-// describe("POSTNET decode", function(){
-//     sinon.spy(console, 'log');
-//
-//     it("input a empty string return error", function(){
-//
-//         var result = POSTNET.postEncode();
-//         var expect_string = '';
-//
-//         expect(expect_string).to.equal(result);
-//     });
-// });
+describe("POSTNET decode", function(){
+    sinon.spy(console, 'log');
+
+    it("input empty return an error message", function(){
+
+        var result = POSTNET.postDecode();
+        var expect_string = 'plz input an correct barcode';
+
+        expect(expect_string).to.equal(result);
+    });
+
+});
