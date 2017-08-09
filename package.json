@@ -10,7 +10,7 @@
     "chai": "3.4.1",
     "sinon": "1.17.2",
     "mocha": "2.2.5",
-    "sinon-chai" : "2.8.0",
+    "sinon-chai": "2.8.0",
     "lodash": "3.9.3"
   },
   "author": "",
