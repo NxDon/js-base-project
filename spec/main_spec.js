@@ -69,4 +69,11 @@ describe("POSTNET decode", function(){
 
         expect(expect_string).to.equal(result);
     });
+    it("input 52 length barcode return an 9 length post number split by '-'", function(){
+
+        var result = POSTNET.postDecode("||:|:::|:|:|:::|:::||::||:|:|:::|:|:|:::|:::||::||:|");
+        var expect_string = '95713-9571';
+
+        expect(expect_string).to.equal(result);
+    });
 });
