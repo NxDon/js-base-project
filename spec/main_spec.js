@@ -6,7 +6,7 @@ var sinonChai = require("sinon-chai");
 var expect = chai.expect;
 chai.use(sinonChai);
 
-var POSTNET = require("../lib/main.js");
+var transformStr = require("../lib/main.js");
 
 
 describe("POSTNET encode", function () {
@@ -14,35 +14,35 @@ describe("POSTNET encode", function () {
 
     it("input a empty string return error", function () {
 
-        var result = POSTNET.postEncode();
-        var expect_string = 'plz input correct format post number';
+        var result = transformStr();
+        var expect_string = 'plz input correctly';
 
         expect(expect_string).to.equal(result);
     });
     it("input a wrong formatted string return error", function () {
 
-        var result = POSTNET.postEncode("1234");
-        var expect_string = 'plz input correct format post number';
+        var result = transformStr("1234");
+        var expect_string = 'plz input correctly';
 
         expect(expect_string).to.equal(result);
     });
     it("input a length 5 string return barcode", function () {
 
-        var result = POSTNET.postEncode("95713");
+        var result = transformStr("95713");
         var expect_string = '||:|:::|:|:|:::|:::||::||::|:|:|';
 
         expect(expect_string).to.equal(result);
     });
     it("input a length 9 string return barcode", function () {
 
-        var result = POSTNET.postEncode("957139571");
+        var result = transformStr("957139571");
         var expect_string = '||:|:::|:|:|:::|:::||::||:|:|:::|:|:|:::|:::||::||:|';
 
         expect(expect_string).to.equal(result);
     });
     it("input a length 10 string return barcode", function () {
 
-        var result = POSTNET.postEncode("95713-9571");
+        var result = transformStr("95713-9571");
         var expect_string = '||:|:::|:|:|:::|:::||::||:|:|:::|:|:|:::|:::||::||:|';
 
         expect(expect_string).to.equal(result);
@@ -52,26 +52,26 @@ describe("POSTNET encode", function () {
 
 });
 
-describe("POSTNET decode", function(){
+describe("POSTNET decode", function () {
     sinon.spy(console, 'log');
 
-    it("input empty return an error message", function(){
+    it("input empty return an error message", function () {
 
-        var result = POSTNET.postDecode("");
-        var expect_string = 'plz input an correct barcode';
+        var result = transformStr("");
+        var expect_string = 'plz input correctly';
 
         expect(expect_string).to.equal(result);
     });
-    it("input 32 length barcode return an 5 length post number", function(){
+    it("input 32 length barcode return an 5 length post number", function () {
 
-        var result = POSTNET.postDecode("||:|:::|:|:|:::|:::||::||::|:|:|");
+        var result = transformStr("||:|:::|:|:|:::|:::||::||::|:|:|");
         var expect_string = '95713';
 
         expect(expect_string).to.equal(result);
     });
-    it("input 52 length barcode return an 9 length post number split by '-'", function(){
+    it("input 52 length barcode return an 9 length post number split by '-'", function () {
 
-        var result = POSTNET.postDecode("||:|:::|:|:|:::|:::||::||:|:|:::|:|:|:::|:::||::||:|");
+        var result = transformStr("||:|:::|:|:|:::|:::||::||:|:|:::|:|:|:::|:::||::||:|");
         var expect_string = '95713-9571';
 
         expect(expect_string).to.equal(result);
