@@ -57,10 +57,16 @@ describe("POSTNET decode", function(){
 
     it("input empty return an error message", function(){
 
-        var result = POSTNET.postDecode();
+        var result = POSTNET.postDecode("");
         var expect_string = 'plz input an correct barcode';
 
         expect(expect_string).to.equal(result);
     });
+    it("input 32 length barcode return an 5 length post number", function(){
 
+        var result = POSTNET.postDecode("||:|:::|:|:|:::|:::||::||::|:|:|");
+        var expect_string = '95713';
+
+        expect(expect_string).to.equal(result);
+    });
 });
